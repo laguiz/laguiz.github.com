@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="shortcut icon" href="vendor/boostrap-3.0.0/assets/ico/favicon.png">
+
+    <title>Signin - Contact List</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+
+    <style type="text/css">
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+       display: none !important;
+      }
+
+    </style>
+
+    <script type="text/javascript">
+      window.addEventListener("load", function() { window.scrollTo(0, 1); });
+    </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-app="app">
+
+    <div class="container" ng-controller="AppCtrl">
+
+      <div class="row animate-show" ng-cloak ng-show="global.screen == 'login'">
+        <form class="form-signin">
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <input type="text" class="form-control" placeholder="Login" autofocus style="margin-bottom: 10px">
+          <input type="password" class="form-control" placeholder="Password"  style="margin-bottom: 10px">
+          <!-- <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+          -->
+          <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="global.screen='list'">Sign in</button>
+        </form>
+      </div>
+
+      <div class="row animate-show" ng-cloak ng-show="global.screen != 'login'" style="margin-top: -1px;" ng-controller="ListCtrl">
+        <div class="container topbar">
+          <div class="left col-xs-3">
+            <i class="icon-reorder pull-left" style="margin-top: 0px;"></i>
+          </div>
+          <div class="middle col-xs-6" style="font-size: 17px; margin-top: -4px">Contact List</div>
+          <div class="right  col-xs-3">
+              <i class="glyphicon glyphicon-cog pull-right"></i>
+          </div>
+        </div>
+        <div class="container box-container" ng-cloak ng-show="global.screen == 'list'">
+            <!-- Example row of columns -->
+            <div class="row">
+              <div>
+                <!-- col-md-6 
+              ng-show='model.selectedEntity == undefined || model.selectedEntity == entity'-->
+                <div class="box" ng-class="{selected: model.selectedEntity == entity}" ng-repeat="entity in model.entities" ng-show="
+                  model.selectedEntity == undefined || model.showDetail == false || (model.selectedEntity == entity && model.showDetail)">
+                  <div ng-click="selectEntity(entity)" style="min-height: 60px; margin-top: 0px;">
+                    <div class="code">{{entity.code}}</div>
+                    <div class="name">{{entity.name}}</div>
+                  </div>
+                  <div class="detail" ng-show="model.showDetail && model.selectedEntity == entity">
+                    <table class="table table-striped">
+                        <tr ng-repeat="role in entity.roles">
+                            <td>{{role.name}}</td>
+                            <td>{{role.user.name}} 
+                              <!-- <button type="button" class="btn btn-sm btn-primary pull-right">Change</button>
+                              -->
+                              </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <!-- 
+                    <div class="btn-toolbar">
+                      <button type="button" class="btn btn-lg btn-primary pull-right" ng-click="unselectEntity()">Close</button>
+                      
+                      <button type="button" class="btn btn-lg btn-danger pull-left">Reject</button>
+                      <button type="button" class="btn btn-lg btn-default pull-left">Cancel</button>
+                      <button type="button" class="btn btn-lg btn-success pull-right">Validate</button>
+                      
+                    </div>
+                    -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container bottombar" ng-cloak ng-show="model.selectedEntity && !model.showDetail">
+              <button type="button" class="btn btn-lg btn-default pull-left" ng-click="unselectEntity()">Cancel</button>
+              <button type="button" class="btn btn-lg btn-primary pull-right" ng-click="model.showDetail = true">Details</button> 
+          </div>
+          <div class="container bottombar" ng-cloak ng-show="model.selectedEntity && model.showDetail">
+              <button type="button" class="btn btn-lg btn-danger pull-left" ng-click="unselectEntity()">Reject</button>
+              <button type="button" class="btn btn-lg btn-success pull-right" ng-click="unselectEntity()">Validate</button> 
+          </div>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script type="text/javascript" src="vendor/angular-1.2.0-rc.2/angular.js"></script>
+    <script type="text/javascript" src="vendor/angular-1.2.0-rc.2/angular-animate.js"></script>
+    <script type="text/javascript" src="js/angular/app.js"></script>
+
+  </body>
+</html>
