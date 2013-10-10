@@ -9,10 +9,12 @@ body {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+  text-align: center;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
+  text-align: left;
 }
 .form-signin .checkbox {
   font-weight: normal;
@@ -40,6 +42,14 @@ body {
   border-top-right-radius: 0;
 }
 
+
+img{
+  vertical-align: middle;
+height: 160px;
+width: 160px;
+text-align: center;
+margin-top: 32px;
+}
 
 //HELPERS
 
